@@ -1,40 +1,63 @@
 // fetch and process the data.json
 fetch('./data.json')
-  .then(response => response.json())
-  .then(data => {
-    startAnimation(data[0]); 
+  .then((response) => response.json())
+  .then((data) => {
+    animateContent(data[0]); // use the first venue data
   })
   .catch(error => {
     console.error("Error fetching the JSON data:", error);
   });
 
-function startAnimation(data) {
+function animateContent(data) {
   const canvas = document.getElementById('canvas');
-  const timeline = gsap.timeline();
+  const timeline = gsap.timeline({ repeat: -1 }); // loop animations
 
   canvas.innerHTML = '';
 
   // part 1: display "LIVE SPORT THIS WEEK"
-  const stage1Text = document.createElement('h1');
-  stage1Text.textContent = 'LIVE SPORT THIS WEEK';
-  stage1Text.style.color = data.theme.colours.primary;
-  stage1Text.style.textAlign = 'center';
-  canvas.appendChild(stage1Text);
+  timeline.call(() => {
+    canvas.innerHTML = '';
+    const container = document.createElement('div');
+    container.style.backgroundColor = data.theme.colours.primary; // set background color for the container
+    container.style.padding = '20px';
+    container.style.borderRadius = '10px'; // set rounded corners
+    container.style.height = '300px'; // fixed height
+    container.style.display = 'flex';
+    container.style.justifyContent = 'center';
+    container.style.alignItems = 'center';
+
+    const liveSportText = document.createElement('h1');
+    liveSportText.textContent = 'LIVE SPORT THIS WEEK';
+    liveSportText.style.color = data.theme.colours.textPrimary;
+    liveSportText.style.textAlign = 'center';
+    liveSportText.style.fontFamily = 'Geogrotesque-Bold';
+    
+    container.appendChild(liveSportText);
+    canvas.appendChild(container);
+  });
   timeline.fromTo(
-    stage1Text,
-    { opacity: 0 },
-    { opacity: 1, duration: 0.5, repeat: 2, yoyo: true }
+    'h1',
+    { opacity: 0, scale: 0.8, rotate: -10 },
+    { opacity: 1, scale: 1, rotate: 0, duration: 1, ease: 'power3.out' }
   );
+  timeline.to('h1', { opacity: 0, scale: 0.8, duration: 0.5, delay: 0.5 });
 
   // part 2: "Coogee Bay Hotel"
   timeline.call(() => {
     canvas.innerHTML = '';
     const container = document.createElement('div');
+    container.style.backgroundColor = data.theme.colours.primary; // set background color for the container
+    container.style.padding = '20px';
+    container.style.borderRadius = '10px'; // set rounded corners
+    container.style.height = '300px'; // fixed height
+    container.style.display = 'flex';
+    container.style.justifyContent = 'center';
+    container.style.alignItems = 'center';
     
     const logo = document.createElement('img');
     logo.src = data.mainImage; // fetch Coogee Bay Hotel logo URL
     logo.alt = 'Coogee Bay Hotel Logo';
-    logo.style.width = '200px';
+    logo.style.width = '400px';
     logo.style.height = 'auto';
     logo.style.margin = '0 auto';
     logo.style.display = 'block';
@@ -52,65 +75,96 @@ function startAnimation(data) {
   data.thisWeek.forEach((event, index) => {
     timeline.call(() => {
       canvas.innerHTML = '';
-      const teamContainer = document.createElement('div');
-      teamContainer.style.display = 'flex';
-      teamContainer.style.justifyContent = 'space-between';
-      teamContainer.style.alignItems = 'center';
-      teamContainer.style.width = '80%';
-      teamContainer.style.margin = '0 auto';
+      const eventContainer = document.createElement('div');
+      eventContainer.style.backgroundColor = data.theme.colours.primary; // set background color for event container
+      eventContainer.style.padding = '20px';
+      eventContainer.style.borderRadius = '10px'; // set rounded corners
+      eventContainer.style.height = '300px'; // fixed height
+      eventContainer.style.display = 'flex';
+      eventContainer.style.alignItems = 'center';
+      eventContainer.style.justifyContent = 'center';
 
       // team 1 logo
-      const team1 = createTeamElement(event.playerTeam1Name, event.playerTeam1Image);
-      teamContainer.appendChild(team1);
+      const team1Logo = createTeamLogo(event.playerTeam1Image, event.playerTeam1Name);
+      eventContainer.appendChild(team1Logo);
 
-      const centerText = document.createElement('h2');
-      centerText.textContent = `${event.playerTeam1Name} v ${event.playerTeam2Name}`;
-      centerText.style.textAlign = 'center';
-      centerText.style.color = data.theme.colours.textPrimary;
-      teamContainer.appendChild(centerText);
+      const matchInfo = document.createElement('h3');
+      matchInfo.textContent = event.title;
+      matchInfo.style.color = data.theme.colours.textPrimary;
+      matchInfo.style.fontFamily = 'Geogrotesque-SemiBold';
+      matchInfo.style.textAlign = 'center';
+      matchInfo.style.flex = '1';
+      matchInfo.className = 'centerText';
+      eventContainer.appendChild(matchInfo);
 
       // team 2 logo
-      const team2 = createTeamElement(event.playerTeam2Name, event.playerTeam2Image);
-      teamContainer.appendChild(team2);
+      const team2Logo = createTeamLogo(event.playerTeam2Image, event.playerTeam2Name);
+      eventContainer.appendChild(team2Logo);
 
-      canvas.appendChild(teamContainer);
+      canvas.appendChild(eventContainer);
+    }); 
 
-      // add event time text below
-      const timeText = document.createElement('h3');
-      timeText.textContent = `${event.startTime}`;
-      timeText.style.color = data.theme.colours.textSecondary;
-      timeText.style.textAlign = 'center';
-      timeText.style.marginTop = '20px';
-      canvas.appendChild(timeText);
+    // animate team logos
+    timeline.from('.teamLogo', { opacity: 0, x: index % 2 === 0 ? -200 : 200, duration: 1, ease: 'power3.out' });
+
+    // animate match info text
+    timeline.fromTo(
+      '.centerText',
+      { opacity: 0 },
+      { opacity: 1, duration: 1, ease: 'power3.out' },
+      '<'
+    );
+
+    // replace match info with start time
+    timeline.call(() => {
+      const matchInfo = document.querySelector('.centerText');
+      matchInfo.textContent = event.startTime;
+      matchInfo.style.color = data.theme.colours.textPrimary;
     });
+    timeline.fromTo(
+      '.centerText',
+      { opacity: 0 },
+      { opacity: 1, duration: 1, ease: 'power3.out' },
+      '<'
+    );
 
-    // animations for teams and center text
-    timeline.from('h2', { scale: 0, opacity: 0, duration: 0.5 });
-    timeline.from('h3', { y: 50, opacity: 0, duration: 0.5 });
-    timeline.from('.team img', { scale: 0, opacity: 0, stagger: 0.3, duration: 0.5 });
+    // transition to the next event
+    timeline.to('.teamLogo, .centerText', { opacity: 0, duration: 0.5, delay: 0.5 });
   });
 }
 
-// helper function to create team elements
-function createTeamElement(teamName, teamImage) {
-  const teamDiv = document.createElement('div');
-  teamDiv.className = 'team';
-  teamDiv.style.textAlign = 'center';
+// helper function to create team logos with their names
+function createTeamLogo(imageSrc, teamName) {
+  // create a container div for team logo
+  const teamContainer = document.createElement('div');
+  teamContainer.className = 'teamLogoContainer';
+  teamContainer.style.display = 'flex';
+  teamContainer.style.flexDirection = 'column';
+  teamContainer.style.alignItems = 'center';
+  teamContainer.style.margin = '10px';
 
+  // create the logo element
   const img = document.createElement('img');
-  img.src = teamImage;
-  img.alt = teamName;
-  img.style.width = '80px';
-  img.style.height = '80px';
+  img.src = imageSrc;
+  img.alt = `${teamName} Logo`;
+  img.className = 'teamLogo';
+  img.style.width = '100px';
+  img.style.height = '100px';
   img.style.borderRadius = '50%';
-  teamDiv.appendChild(img);
-
-  const name = document.createElement('p');
+  img.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.2)';
+  
+  // create the team name element
+  const name = document.createElement('span');
+  name.className = 'teamName';
   name.textContent = teamName;
   name.style.marginTop = '10px';
-  name.style.fontSize = '0.9rem';
+  name.style.fontSize = '20px';
   name.style.fontWeight = 'bold';
-  teamDiv.appendChild(name);
+  name.style.textAlign = 'center';
 
-  return teamDiv;
+  // append logo and name to the container to display
+  teamContainer.appendChild(img);
+  teamContainer.appendChild(name);
+
+  return teamContainer;
 }

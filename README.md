@@ -13,8 +13,14 @@ This project demonstrates a JS web animation using [GSAP](https://gsap.com/) to 
 - **[Version 1: Build a JavaScript web animation](https://github.com/archejk/jse-code-exercise/pull/2)**
 - **[Version 2: Build a JavaScript web animation](https://github.com/archejk/jse-code-exercise/pull/3)**
 - **[Version 3: Build a JavaScript web animation](https://github.com/archejk/jse-code-exercise/pull/4)**
+- **[Version 4: JavaScript web animation small enhancement](https://github.com/archejk/jse-code-exercise/pull/5)**
 ----
 1. Clone the repository:
 
    ```bash
    git clone https://github.com/archejk/jse-code-exercise.git
+
+## Demo
+
+[[JSE CE] Version 4: Build a JavaScript web animation.webm](https://github.com/user-attachments/assets/96c00bd4-8a90-4cdd-b84e-9874577dcf3f)
+

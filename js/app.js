@@ -40,7 +40,7 @@ function displayLiveSportThisWeekText(data, canvas, gsapTimeline) {
     const container = document.createElement('div');
     container.style.backgroundColor = data.theme.colours.primary;
     container.style.padding = '20px';
-    container.style.borderRadius = '10px';
+    // container.style.borderRadius = '10px';
     container.style.height = '300px';
     container.style.display = 'flex';
     container.style.justifyContent = 'center';
@@ -108,7 +108,7 @@ function displayCogooBayLogoP1(data, canvas, gsapTimeline) {
     const container = document.createElement('div');
     container.style.backgroundColor = data.theme.colours.primary;
     container.style.padding = '20px';
-    container.style.borderRadius = '10px';
+    // container.style.borderRadius = '10px';
     container.style.height = '300px';
     container.style.display = 'flex';
     container.style.justifyContent = 'center';
@@ -158,7 +158,7 @@ function displayThisWeekEvents(data, canvas, gsapTimeline) {
       const eventContainer = document.createElement('div');
       eventContainer.style.backgroundColor = data.theme.colours.primary;
       eventContainer.style.padding = '20px';
-      eventContainer.style.borderRadius = '10px';
+      // eventContainer.style.borderRadius = '10px';
       eventContainer.style.height = '300px';
       eventContainer.style.display = 'flex';
       eventContainer.style.alignItems = 'center';
@@ -181,14 +181,14 @@ function displayThisWeekEvents(data, canvas, gsapTimeline) {
       matchSubTitle.textContent = event.subTitle;
       matchSubTitle.style.color = data.theme.colours.textPrimary;
       matchSubTitle.style.fontFamily = 'Geogrotesque-Regular';
-      matchSubTitle.style.marginBottom = '-32px'; // spacing below subTitle
+      matchSubTitle.style.marginBottom = '-75px'; // spacing below subTitle
       matchSubTitle.className = 'centerSubText';
 
       // title
       const matchInfo = document.createElement('h3');
       matchInfo.textContent = event.title;
       matchInfo.style.color = data.theme.colours.textPrimary;
-      matchInfo.style.fontFamily = 'Geogrotesque-SemiBold';
+      matchInfo.style.fontFamily = 'Geogrotesque-Bold';
       matchInfo.className = 'centerText';
 
       // append subTitle and title to match details container
@@ -300,7 +300,7 @@ function displayUpcomingHighlightsText(data, canvas, gsapTimeline) {
     const container = document.createElement('div');
     container.style.backgroundColor = data.theme.colours.primary;
     container.style.padding = '20px';
-    container.style.borderRadius = '10px';
+    // container.style.borderRadius = '10px';
     container.style.height = '300px';
     container.style.display = 'flex';
     container.style.justifyContent = 'center';
@@ -327,16 +327,38 @@ function displayUpcomingHighlightsText(data, canvas, gsapTimeline) {
 
     // apply GSAP staggered animation to each letter
     gsap.fromTo(letters, 
-      { opacity: 0, y: 50, rotation: -10 },
-      { opacity: 1, y: 0, rotation: 0, duration: 0.5, ease: 'power3.out', stagger: 0.02, delay: 0.5 }
+      { opacity: 0,
+        y: 50,
+        rotation: -10
+      },
+      { opacity: 1,
+        y: 0,
+        rotation: 0,
+        duration: 0.5,
+        ease: 'power3.out',
+        stagger: 0.02,
+        delay: 0.5
+      }
+    );
+
+    gsap.to(letters,
+      {
+        opacity: 0,
+        y: -50,
+        rotation: 10,
+        duration: 0.5,
+        ease: 'power3.in',
+        stagger: 0.02,
+        delay: 2,
+      }
     );
   });
   gsapTimeline.fromTo(
     'h1',
-    { opacity: 0, y: -50 },
-    { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }
+    { opacity: 0,scale: 0.8,rotate: -10 },
+    { opacity: 1,scale: 1,rotate: 0,duration: 1,ease: 'power3.out' }
   );
-  gsapTimeline.to('h1', { opacity: 0, duration: 0.5, delay: 0.5 });
+  gsapTimeline.to('h1',{ opacity: 0,scale: 0.8,duration: 2,delay: 0.5 });
 }
 
 function displayCogooBayLogoP2(data, canvas, gsapTimeline) {
@@ -345,7 +367,7 @@ function displayCogooBayLogoP2(data, canvas, gsapTimeline) {
     const container = document.createElement('div');
     container.style.backgroundColor = data.theme.colours.primary;
     container.style.padding = '20px';
-    container.style.borderRadius = '10px';
+    // container.style.borderRadius = '10px';
     container.style.height = '300px';
     container.style.display = 'flex';
     container.style.justifyContent = 'center';
@@ -396,7 +418,7 @@ function displayUpcomingEvents(data, canvas, gsapTimeline) {
       const eventContainer = document.createElement('div');
       eventContainer.style.backgroundColor = data.theme.colours.primary;
       eventContainer.style.padding = '20px';
-      eventContainer.style.borderRadius = '10px';
+      // eventContainer.style.borderRadius = '10px';
       eventContainer.style.height = '300px';
       eventContainer.style.display = 'flex';
       eventContainer.style.alignItems = 'center';
@@ -419,14 +441,14 @@ function displayUpcomingEvents(data, canvas, gsapTimeline) {
       matchSubTitle.textContent = event.subTitle;
       matchSubTitle.style.color = data.theme.colours.textPrimary;
       matchSubTitle.style.fontFamily = 'Geogrotesque-Regular';
-      matchSubTitle.style.marginBottom = '-32px'; // spacing below subTitle
+      matchSubTitle.style.marginBottom = '-75px'; // spacing below subTitle
       matchSubTitle.className = 'centerSubText';
 
       // title
       const matchInfo = document.createElement('h3');
       matchInfo.textContent = event.title;
       matchInfo.style.color = data.theme.colours.textPrimary;
-      matchInfo.style.fontFamily = 'Geogrotesque-SemiBold';
+      matchInfo.style.fontFamily = 'Geogrotesque-Bold';
       matchInfo.className = 'centerText';
 
       // append subTitle and title to match details container
@@ -547,9 +569,9 @@ function createTeamLogo(imageSrc, teamName) {
   img.src = imageSrc;
   img.alt = `${teamName} Logo`;
   img.className = 'teamLogo';
-  img.style.width = '100px';
-  img.style.height = '100px';
-  img.style.borderRadius = '50%';
+  img.style.width = '250px';
+  img.style.height = '250px';
+  img.style.borderRadius = '10%';
   img.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.2)';
   
   // create the team name element
@@ -574,11 +596,11 @@ function displayEndingLogosWithTransition(data, canvas, gsapTimeline) {
     const container = document.createElement('div');
     container.style.backgroundColor = data.theme.colours.primary;
     container.style.padding = '20px';
-    container.style.borderRadius = '10px';
     container.style.height = '300px';
     container.style.display = 'flex';
-    container.style.justifyContent = 'space-between';
+    container.style.justifyContent = 'center';
     container.style.alignItems = 'center';
+    container.style.gap = '200px';
 
     // Coogee Bay Hotel Logo (left side)
     const coogeeLogo = document.createElement('img');
@@ -586,15 +608,13 @@ function displayEndingLogosWithTransition(data, canvas, gsapTimeline) {
     coogeeLogo.alt = data.name;
     coogeeLogo.style.width = '400px';
     coogeeLogo.style.height = 'auto';
-    coogeeLogo.style.marginLeft = '20px';
 
     // Powered by SportsYear Logo (right side)
     const sportsYearLogo = document.createElement('img');
     sportsYearLogo.src = './images/Sportsyear-logo.png';
     sportsYearLogo.alt = 'Powered by SportsYear Logo';
-    sportsYearLogo.style.width = '400px';
+    sportsYearLogo.style.width = '600px';
     sportsYearLogo.style.height = 'auto';
-    sportsYearLogo.style.marginRight = '20px';
 
     container.appendChild(coogeeLogo);
     container.appendChild(sportsYearLogo);
@@ -627,11 +647,10 @@ function displayEndingLogosWithTransition(data, canvas, gsapTimeline) {
       }
     );
   });
-  
+
   gsapTimeline.fromTo(
     'img',
     { opacity: 0, scale: 0.8, y: 50 },
     { opacity: 1, scale: 1, y: 0, duration: 4, ease: 'power3.out' }
   );
 }
-

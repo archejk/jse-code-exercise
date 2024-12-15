@@ -2,6 +2,9 @@
 
 This project demonstrates a JS web animation using [GSAP](https://gsap.com/) to animate elements dynamically. The animation is built by fetching the local `data.json` file and using its data to create an animation similar to the one shown in the provided `example-animation.mp4`. The data is used to create events for "Live Sport This Week" and "Upcoming Highlights," and the main goal is to replicate a similar animation to the example.
 
+## Project Link
+- [JSE Code Exercise](https://github.com/users/archejk/projects/15/views/1)
+
 ## Ticket
 - [JSE-CE] Build a JavaScript web animation: [GitHub Issue](https://github.com/archejk/jse-code-exercise/issues/1)
 

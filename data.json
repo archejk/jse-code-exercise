@@ -20,7 +20,7 @@
 		"thisWeek": [
 			{
 				"id": 248752,
-				"title": "STARS V HEAT",
+				"title": "STARS v HEAT",
 				"subTitle": "BBL",
 				"subTitleFull": "BIG BASH LEAGUE GROUP GAME",
 				"startTime": "WED 7:15PM",
@@ -40,7 +40,7 @@
 			},
 			{
 				"id": 252039,
-				"title": "ORLANDO V OKL. CITY",
+				"title": "ORLANDO v OKL. CITY",
 				"subTitle": "NBA",
 				"subTitleFull": "NBA REGULAR SEASON",
 				"startTime": "FRI 11:00AM",
@@ -60,7 +60,7 @@
 			},
 			{
 				"id": 251444,
-				"title": "MINNESOTA V NEW YORK",
+				"title": "MINNESOTA v NEW YORK",
 				"subTitle": "NBA",
 				"subTitleFull": "NBA REGULAR SEASON",
 				"startTime": "FRI 1:30PM",
@@ -80,7 +80,7 @@
 			},
 			{
 				"id": 251841,
-				"title": "CLEVELAND V MILWAUKEE",
+				"title": "CLEVELAND v MILWAUKEE",
 				"subTitle": "NBA",
 				"subTitleFull": "NBA REGULAR SEASON",
 				"startTime": "SAT 11:30AM",
@@ -102,7 +102,7 @@
 		"upcoming": [
 			{
 				"id": 250361,
-				"title": "VICTORY V MELB. CITY",
+				"title": "VICTORY v MELB. CITY",
 				"subTitle": "A-LEAGUE",
 				"subTitleFull": "A-LEAGUE MEN REGULAR SEASON",
 				"startTime": "NEXT WEEK",
@@ -122,7 +122,7 @@
 			},
 			{
 				"id": 243520,
-				"title": "VILLA V MAN. CITY",
+				"title": "VILLA v MAN. CITY",
 				"subTitle": "PREMIER LEAGUE",
 				"subTitleFull": "PREMIER LEAGUE",
 				"startTime": "NEXT WEEK",
@@ -142,7 +142,7 @@
 			},
 			{
 				"id": 251662,
-				"title": "ATLANTA V MEMPHIS",
+				"title": "ATLANTA v MEMPHIS",
 				"subTitle": "NBA",
 				"subTitleFull": "NBA REGULAR SEASON",
 				"startTime": "IN SIX WEEKS",
